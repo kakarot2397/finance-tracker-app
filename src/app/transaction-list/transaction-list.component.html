@@ -1,0 +1,50 @@
+<mat-card class="transaction-list-card">
+  <mat-card-header>
+    <mat-card-title>Transactions</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content class="filter-container">
+    <mat-form-field appearance="fill" class="filter-field">
+      <mat-label>Type</mat-label>
+      <mat-select [(ngModel)]="filter.type">
+        <mat-option value="">All</mat-option>
+        <mat-option value="income">Income</mat-option>
+        <mat-option value="expense">Expense</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill" class="filter-field">
+      <mat-label>Date From</mat-label>
+      <input matInput [matDatepicker]="pickerFrom" [(ngModel)]="filter.dateFrom">
+      <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFrom></mat-datepicker>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill" class="filter-field">
+      <mat-label>Date To</mat-label>
+      <input matInput [matDatepicker]="pickerTo" [(ngModel)]="filter.dateTo">
+      <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+      <mat-datepicker #pickerTo></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="apply-button" (click)="applyFilter()">Apply Filter</button>
+  </mat-card-content>
+
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let transaction of filteredTransactions">
+        <div matLine>{{ transaction.date | date }}</div>
+        <div matLine>{{ transaction.description }}</div>
+        <div matLine [ngClass]="{'income': transaction.type === 'income', 'expense': transaction.type === 'expense'}">
+          {{ transaction.amount | currency }}
+        </div>
+        <button mat-icon-button (click)="editTransaction(transaction)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteTransaction(transaction.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
