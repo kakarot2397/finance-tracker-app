@@ -18,6 +18,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule} from  '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatToolbarModule,
     MatIconModule,
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
