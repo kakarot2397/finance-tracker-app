@@ -1,6 +1,11 @@
+<!-- First Card: Filter and Action Buttons -->
 <mat-card class="transaction-list-card">
-  <mat-card-header>
+  <mat-card-header class="header">
     <mat-card-title>Transactions</mat-card-title>
+    <div class="button-container">
+      <button mat-raised-button color="primary" class="apply-button" (click)="applyFilter()">Apply Filter</button>
+      <button mat-raised-button class="download-button" (click)="downloadCSV()">Download CSV</button>
+    </div>
   </mat-card-header>
 
   <mat-card-content class="filter-container">
@@ -26,26 +31,24 @@
       <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
       <mat-datepicker #pickerTo></mat-datepicker>
     </mat-form-field>
-
-    <button mat-raised-button color="primary" class="apply-button" (click)="applyFilter()">Apply Filter</button>
-    <button mat-raised-button class="button" (click)="downloadCSV()">Download CSV</button>
-  </mat-card-content>
-
-  <mat-card-content>
-    <mat-list>
-      <mat-list-item *ngFor="let transaction of filteredTransactions">
-        <div matLine>{{ transaction.date | date }}</div>
-        <div matLine>{{ transaction.description }}</div>
-        <div matLine [ngClass]="{'income': transaction.type === 'income', 'expense': transaction.type === 'expense'}">
-          {{ transaction.amount | currency }}
-        </div>
-        <button mat-icon-button (click)="editTransaction(transaction)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button (click)="deleteTransaction(transaction.id)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </mat-list-item>
-    </mat-list>
   </mat-card-content>
 </mat-card>
+
+<!-- Second Card: Transaction List -->
+<div class="transaction-list">
+  <div *ngFor="let transaction of filteredTransactions" class="transaction-item">
+    <div class="transaction-description">{{ transaction.description }}</div>
+    <div class="transaction-date">{{ transaction.date | date }}</div>
+    <div class="transaction-amount" [ngClass]="{'income': transaction.type === 'income', 'expense': transaction.type === 'expense'}">
+      {{ transaction.amount | currency }}
+    </div>
+    <div class="transaction-buttons">
+      <button mat-icon-button (click)="editTransaction(transaction)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="deleteTransaction(transaction.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
