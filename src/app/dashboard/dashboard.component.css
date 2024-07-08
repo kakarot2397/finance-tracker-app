@@ -5,19 +5,19 @@
 
 .dashboard-content {
   display: flex;
-  justify-content: space-between; /* Distribute space evenly between sections */
+  justify-content: space-between; 
 }
 
 .left-section, .right-section {
-  width: 48%; /* Adjust width as needed to leave space for margins */
+  width: 48%; 
 }
 
 .mat-card {
-  height: 100%; /* Ensure cards take full height of their container */
+  height: 100%; 
 }
 
 .right-section {
-  background-color: #f0f0f0; /* Example background color */
+  background-color: #f0f0f0; 
 }
 .income {
   color: green;

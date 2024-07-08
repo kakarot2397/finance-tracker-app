@@ -6,8 +6,8 @@
   <mat-card-content class="dashboard-content">
     <!-- Left Section (Financial Summary) -->
     <div class="left-section">
-      <mat-card>
-        <mat-card-content>
+      <mat-card style="background-color:rgb(104,60,180);">
+        <mat-card-content style="color: white;">
           <p>Total Income: {{ totalIncome | currency }}</p>
           <p>Total Expenses: {{ totalExpenses | currency }}</p>
           <p>Current Balance: {{ currentBalance | currency }}</p>
@@ -17,13 +17,13 @@
 
     <!-- Right Section (Recent Transactions or other info) -->
     <div class="right-section">
-      <mat-card>
+      <mat-card style="background-color:rgb(104,60,180);">
         <mat-card-header>
-          <mat-card-title>Recent Transactions</mat-card-title>
+          <mat-card-title style="color: white;">Recent Transactions</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content style="color: white;">
           <ul>
-            <li *ngFor="let transaction of recentTransactions" [ngClass]="{'income': transaction.type === 'income', 'expense': transaction.type === 'expense'}">
+            <li *ngFor="let transaction of recentTransactions">
               <strong >{{ transaction.date | date }}</strong> - {{ transaction.description }} - {{ transaction.amount | currency }}
             </li>
           </ul>
