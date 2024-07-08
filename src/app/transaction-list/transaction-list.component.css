@@ -21,3 +21,13 @@
 .expense {
   color: red;
 }
+.button{
+  background-color: rgb(104,60,180); color: white;
+
+}
+.center-button {
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+  height: 100%; /* Ensure button takes full height */
+}

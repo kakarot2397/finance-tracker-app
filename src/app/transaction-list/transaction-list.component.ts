@@ -36,6 +36,26 @@ export class TransactionListComponent implements OnInit {
       return matchesType && matchesDateFrom && matchesDateTo;
     });
   }
+  downloadCSV(): void {
+    const csvContent = this.convertToCSV(this.filteredTransactions);
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const downloadLink = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+
+    downloadLink.href = url;
+    downloadLink.setAttribute('download', 'transactions.csv');
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
+
+  convertToCSV(transactions: Transaction[]): string {
+    const header = ['Date', 'Description', 'Amount', 'Type'];
+    const rows = transactions.map(transaction =>
+      `${transaction.date}, ${transaction.description}, ${transaction.amount}, ${transaction.type}`
+    );
+    return header.join(',') + '\n' + rows.join('\n');
+  }
 
   editTransaction(transaction: Transaction): void {
     this.router.navigate(['/edit-transaction', transaction.id]);
